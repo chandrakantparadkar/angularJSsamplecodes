@@ -1,6 +1,5 @@
 var myApp = angular.module('myApp', []);
 
-myApp.controller('mainController',function(){
-	console.log('Sample print for controller');
-}
-);
+myApp.controller('mainController', function($scope) {
+	$scope.name = "Chandrakant";
+});
