@@ -1,23 +1,29 @@
-var myApp = angular.module('myApp', []);
+var myApp = angular.module('myApp', ['ngRoute']);
 
-myApp.controller('mainController', [ "$scope", "$log", "$filter", "$http",
-		function($scope, $log, $filter, $http) {
-			$scope.handle = '';
+myApp.config(function ($routeProvider) {
+    
+    $routeProvider
+    
+    .when('/', {
+        templateUrl: 'pages/main.html',
+        controller: 'mainController'
+    })
+    
+    .when('/second', {
+        templateUrl: 'pages/second.html',
+        controller: 'secondController'
+    })
+    
+});
 
-			$scope.lowercasehandle = function() {
-				return $filter('lowercase')($scope.handle);
-			};
+myApp.controller('mainController', ['$scope', '$log', function($scope, $log) {
+    
+    $scope.name = 'Main';
+    
+}]);
 
-		    $http.get('http://localhost:8080/greeting')
-	        .success(function (result) {
-
-	        	   console.log(result);
-
-	        })
-	        .error(function (data, status) {
-
-	            console.log(data);
-
-	        });
-
-		} ]);
+myApp.controller('secondController', ['$scope', '$log', function($scope, $log) {
+    
+    $scope.name = 'Second';
+    
+}]);
